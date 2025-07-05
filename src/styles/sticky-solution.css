@@ -1,0 +1,14 @@
+/* Farb-Icon zeigen, graues Icon ausblenden */
+.solution_text-step.is-active .solution_text-step-image .grey {
+  opacity: 0;
+}
+
+.solution_text-step.is-active .solution_text-step-image .color {
+  opacity: 1;
+}
+
+/* Titel & Paragraph einfärben */
+.solution_text-step.is-active .solution_text-step-title,
+.solution_text-step.is-active .solution_text-step-paragraph {
+  color: #d3d3d3; /* oder dein light-grey Hex/Farbwert */
+}
