@@ -37,7 +37,6 @@ if (scrollContainer && solutionImages.length > 0) {
         el.classList.add('is-active');
         const textSteps = gsap.utils.toArray('.solution_text-step');
         if (textSteps[i]) textSteps[i].classList.add('is-active');
-        console.log(`→ is-active gesetzt bei .is-${i + 1}`);
       },
       onEnterBack: () => {
         solutionImages.forEach((img) => img.classList.remove('is-active'));
@@ -47,9 +46,7 @@ if (scrollContainer && solutionImages.length > 0) {
         el.classList.add('is-active');
         const textSteps = gsap.utils.toArray('.solution_text-step');
         if (textSteps[i]) textSteps[i].classList.add('is-active');
-        console.log(`← is-active zurückgesetzt bei .is-${i + 1}`);
       },
-      markers: true,
       id: `solution-step-${i + 1}`,
     });
   });

@@ -1,0 +1,7 @@
+.video_play-button:hover .video_play-button-icon {
+  color: white;
+}
+
+:root {
+  --plyr-color-main: var(--primary);
+}
