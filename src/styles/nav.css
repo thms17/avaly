@@ -1,0 +1,14 @@
+@media (min-width: 992px) {
+  .nav_link,
+  .nav_legal-link {
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .nav_link:hover,
+  .nav_legal-link:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+}

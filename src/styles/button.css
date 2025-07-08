@@ -1,0 +1,27 @@
+@media (min-width: 992px) {
+  .button {
+    transition:
+      background 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .button:hover {
+    background: #7a56d6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(105, 67, 187, 0.2);
+  }
+
+  .button.is-secondary {
+    transition:
+      background 0.3s ease,
+      color 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .button.is-secondary:hover {
+    background: rgba(105, 67, 187, 0.1);
+    color: #6943bb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(105, 67, 187, 0.1);
+  }
+}
