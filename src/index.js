@@ -1,4 +1,5 @@
 import './styles/sticky-solution.css';
+import './styles/legal-wrapper.css';
 import './styles/nav.css';
 import './styles/video.css';
 import './styles/button.css';
