@@ -39,11 +39,11 @@ function loadVideo(videoContainer, players, index) {
   if (!videoPlayer) return;
 
   const webmSource = document.createElement('source');
-  webmSource.src = 'https://pub-7fbaa389e5474397b18d3032829451d4.r2.dev/avaly-demo-video.webm';
+  webmSource.src = 'https://files.theavaly.com/avaly-demo-video.webm';
   webmSource.type = 'video/webm';
 
   const mp4Source = document.createElement('source');
-  mp4Source.src = 'https://pub-7fbaa389e5474397b18d3032829451d4.r2.dev/avaly-demo-video.mp4';
+  mp4Source.src = 'https://files.theavaly.com/avaly-demo-video.mp4';
   mp4Source.type = 'video/mp4';
 
   videoPlayer.appendChild(webmSource);
