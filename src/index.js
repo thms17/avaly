@@ -4,8 +4,10 @@ import './styles/nav.css';
 import './styles/video.css';
 import './styles/button.css';
 import 'plyr/dist/plyr.css';
-import './components/sticky-solution';
-import './components/video';
+// import './components/sticky-solution';
+import './components/sticky-video-section';
+// import './components/video';
+import './components/demo-videos';
 import './components/navbar';
 import './components/how-it-works-text-reveal';
 
