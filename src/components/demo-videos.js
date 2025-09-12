@@ -77,7 +77,7 @@ function loadVideo(videoContainer, players, index) {
   players.set(index, player);
 }
 
-function playVideo(index) {
+function playVideo(players, index) {
   const player = players.get(index);
   if (!player) {
     console.warn('Kein Player für Index:', index);
