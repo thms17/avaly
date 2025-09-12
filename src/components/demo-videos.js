@@ -45,6 +45,7 @@ function loadVideo(videoContainer, players, index) {
     1: 'https://files.theavaly.com/Akzeptanzprognose.webm',
     2: 'https://files.theavaly.com/Sinus-Milieus.webm',
     3: 'https://files.theavaly.com/Lokale-Einflussfaktoren.webm',
+    4: 'https://files.theavaly.com/Kontextfaktoren.webm',
   };
 
   const videoSrc = sources[videoId];

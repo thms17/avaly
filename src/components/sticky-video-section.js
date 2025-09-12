@@ -10,8 +10,9 @@ const textSteps = gsap.utils.toArray('.solution_text-step');
 if (scrollContainer && solutionVideos.length > 0 && textSteps.length > 0) {
   const scrollSteps = [
     { startPercent: 0, endPercent: 10 },
-    { startPercent: 11, endPercent: 37 },
-    { startPercent: 38, endPercent: 100 },
+    { startPercent: 11, endPercent: 30 },
+    { startPercent: 31, endPercent: 55 },
+    { startPercent: 56, endPercent: 100 },
   ];
 
   // Initialzustand
