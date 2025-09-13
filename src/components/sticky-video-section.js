@@ -11,8 +11,8 @@ if (scrollContainer && solutionVideos.length > 0 && textSteps.length > 0) {
   const scrollSteps = [
     { startPercent: 0, endPercent: 10 },
     { startPercent: 11, endPercent: 30 },
-    { startPercent: 31, endPercent: 55 },
-    { startPercent: 56, endPercent: 100 },
+    { startPercent: 31, endPercent: 50 },
+    { startPercent: 51, endPercent: 70 },
   ];
 
   // Initialzustand

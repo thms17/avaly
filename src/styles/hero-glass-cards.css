@@ -1,0 +1,27 @@
+/* Initialzustand: Icon sichtbar, Text versteckt */
+[hero-glass='icon'] {
+  opacity: 1;
+  filter: blur(0px);
+  transition:
+    opacity 200ms ease,
+    filter 200ms ease;
+}
+
+[hero-glass='paragraph'] {
+  opacity: 0;
+  filter: blur(10px);
+  transition:
+    opacity 200ms ease,
+    filter 200ms ease;
+}
+
+/* Hover-Effekt: Icon ausblenden, paragraph einblenden */
+[hero-glass='card']:hover [hero-glass='icon'] {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+[hero-glass='card']:hover [hero-glass='paragraph'] {
+  opacity: 1;
+  filter: blur(0px);
+}
