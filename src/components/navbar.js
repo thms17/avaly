@@ -6,7 +6,7 @@ if (navbar) {
 
   if (noAnimation) {
     // Direkt auf "scrolled" setzen
-    navbar.classList.add('scrolled');
+    navbar.classList.add('no-animation');
   } else {
     // Nur mit Scroll aktivieren
     window.addEventListener('scroll', () => {

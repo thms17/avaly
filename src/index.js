@@ -9,7 +9,6 @@ import './components/sticky-solution';
 import './components/video';
 import './components/demo-videos';
 import './components/navbar';
-import './components/how-it-works-text-reveal';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

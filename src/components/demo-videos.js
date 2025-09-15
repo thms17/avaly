@@ -6,10 +6,6 @@ import Plyr from 'plyr';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* =========================
-     Plyr: Setup & Steuerung
-     ========================= */
-
   const players = new Map();
   const videoContainers = Array.from(document.querySelectorAll('[video-component="container"]'));
 
@@ -24,7 +20,6 @@ import Plyr from 'plyr';
     });
   }
 
-  // nur ein Video gleichzeitig laufen lassen
   function pauseAllExcept(players, keepIndex) {
     players.forEach((p, idx) => {
       if (idx !== keepIndex) p.pause();
@@ -33,7 +28,6 @@ import Plyr from 'plyr';
 
   function handleVideoLoad(button) {
     localStorage.setItem('showVideos', true);
-
     const videoContainer = button.closest('[video-component="container"]');
     if (!videoContainer) return;
 
@@ -45,8 +39,6 @@ import Plyr from 'plyr';
     }
 
     setVideoControlsFocusable(videoContainer, true);
-
-    // erst andere pausieren, dann dieses starten
     pauseAllExcept(players, index);
     playVideo(players, index);
   }
@@ -57,7 +49,6 @@ import Plyr from 'plyr';
     });
   }
 
-  // Quellen anhand des data-Attributes `video`
   function loadVideo(videoContainer, players, index) {
     const videoPlayer = videoContainer.querySelector('[video-component="player"]');
     if (!videoPlayer) return;
@@ -99,7 +90,6 @@ import Plyr from 'plyr';
 
     setVideoControlsFocusable(videoContainer, false);
 
-    // Wenn per Plyr-UI gestartet wird, andere pausieren
     player.on('play', () => {
       setVideoControlsFocusable(videoContainer, true);
       pauseAllExcept(players, index);
@@ -107,14 +97,10 @@ import Plyr from 'plyr';
 
     players.set(index, player);
   }
+
   function playVideo(players, index) {
     const player = players.get(index);
-    if (!player) {
-      console.warn('Kein Player für Index:', index);
-      console.log('Spieler-Keys:', Array.from(players.keys()));
-      return;
-    }
-
+    if (!player) return;
     player.play().catch((err) => {
       console.error('Fehler beim Abspielen:', err);
     });
@@ -124,7 +110,6 @@ import Plyr from 'plyr';
     const controls = videoContainer.querySelectorAll(
       '.plyr__controls button, .plyr__controls input, .plyr__controls a'
     );
-
     controls.forEach((control) => {
       if (isFocusable) control.removeAttribute('tabindex');
       else control.setAttribute('tabindex', '-1');
@@ -132,71 +117,57 @@ import Plyr from 'plyr';
   }
 
   /* =========================
-     GSAP Scroll-Logik (Steps)
+     GSAP Scroll-Logik (nur ab 992px)
      ========================= */
-
   const scrollContainer = document.querySelector('.solution-video_scroll-container');
   const solutionVideos = gsap.utils.toArray('.solution-video');
   const textSteps = gsap.utils.toArray('.solution_text-step');
 
-  if (scrollContainer && solutionVideos.length > 0 && textSteps.length > 0) {
-    // gleichmäßig verteilte Steps, letzter beginnt bewusst früher
-    const scrollSteps = [
-      { startPercent: 0, endPercent: 10 },
-      { startPercent: 11, endPercent: 30 },
-      { startPercent: 31, endPercent: 50 },
-      { startPercent: 51, endPercent: 70 }, // letzter Step startet früher, damit er "rechtzeitig" aktiv ist
-    ];
+  gsap.matchMedia().add('(min-width: 992px)', () => {
+    if (scrollContainer && solutionVideos.length > 0 && textSteps.length > 0) {
+      const scrollSteps = [
+        { startPercent: 0, endPercent: 10 },
+        { startPercent: 11, endPercent: 30 },
+        { startPercent: 31, endPercent: 50 },
+        { startPercent: 51, endPercent: 70 },
+      ];
 
-    // Initialzustand: kein Autoplay
-    solutionVideos.forEach((el, i) => {
-      el.classList.remove('is-active');
-      el.pause?.();
-      if (i === 0) el.classList.add('is-active');
-    });
-
-    textSteps.forEach((el, i) => {
-      el.classList.remove('is-active');
-      if (i === 0) el.classList.add('is-active');
-    });
-
-    // ScrollTrigger pro Step
-    solutionVideos.forEach((el, i) => {
-      const step = scrollSteps[i];
-      if (!step) return;
-
-      ScrollTrigger.create({
-        trigger: scrollContainer,
-        start: `${step.startPercent}% top`,
-        end: `${step.endPercent}% top`,
-        onEnter: () => {
-          // alle pausieren, Klassen setzen, aber NICHT automatisch abspielen
-          solutionVideos.forEach((v) => {
-            v.classList.remove('is-active');
-            v.pause?.();
-          });
-          // zusätzlich alle Plyr-Instanzen pausieren
-          players.forEach((p) => p.pause());
-
-          el.classList.add('is-active');
-
-          textSteps.forEach((t) => t.classList.remove('is-active'));
-          if (textSteps[i]) textSteps[i].classList.add('is-active');
-        },
-        onEnterBack: () => {
-          solutionVideos.forEach((v) => {
-            v.classList.remove('is-active');
-            v.pause?.();
-          });
-          players.forEach((p) => p.pause());
-
-          el.classList.add('is-active');
-
-          textSteps.forEach((t) => t.classList.remove('is-active'));
-          if (textSteps[i]) textSteps[i].classList.add('is-active');
-        },
-        id: `solution-video-step-${i + 1}`,
+      solutionVideos.forEach((el, i) => {
+        el.classList.remove('is-active');
+        el.pause?.();
+        if (i === 0) el.classList.add('is-active');
       });
+
+      textSteps.forEach((el, i) => {
+        el.classList.remove('is-active');
+        if (i === 0) el.classList.add('is-active');
+      });
+
+      solutionVideos.forEach((el, i) => {
+        const step = scrollSteps[i];
+        if (!step) return;
+
+        ScrollTrigger.create({
+          trigger: scrollContainer,
+          start: `${step.startPercent}% top`,
+          end: `${step.endPercent}% top`,
+          onEnter: () => activateStep(i),
+          onEnterBack: () => activateStep(i),
+          id: `solution-video-step-${i + 1}`,
+        });
+      });
+    }
+  });
+
+  function activateStep(i) {
+    solutionVideos.forEach((v) => {
+      v.classList.remove('is-active');
+      v.pause?.();
     });
+    players.forEach((p) => p.pause());
+    solutionVideos[i]?.classList.add('is-active');
+
+    textSteps.forEach((t) => t.classList.remove('is-active'));
+    textSteps[i]?.classList.add('is-active');
   }
 })();
