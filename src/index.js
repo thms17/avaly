@@ -9,6 +9,7 @@ import './components/sticky-solution';
 import './components/video';
 import './components/demo-videos';
 import './components/navbar';
+import './components/glass-cards';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

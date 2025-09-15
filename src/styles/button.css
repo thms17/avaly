@@ -7,6 +7,7 @@
 
   .button:hover {
     background: #7a56d6;
+    border: 2px solid #7a56d6;
     transform: translateY(-2px);
   }
 

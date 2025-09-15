@@ -1,27 +1,50 @@
-/* Initialzustand: Icon sichtbar, Text versteckt */
-[hero-glass='icon'] {
-  opacity: 1;
-  filter: blur(0px);
+/* =========================
+   Gemeinsame Transition
+   ========================= */
+[hero-glass='icon'],
+[hero-glass='paragraph'] {
   transition:
     opacity 200ms ease,
     filter 200ms ease;
+}
+
+/* =========================
+      Basiszustand
+      ========================= */
+[hero-glass='icon'] {
+  opacity: 1;
+  filter: blur(0px);
 }
 
 [hero-glass='paragraph'] {
   opacity: 0;
   filter: blur(10px);
-  transition:
-    opacity 200ms ease,
-    filter 200ms ease;
 }
 
-/* Hover-Effekt: Icon ausblenden, paragraph einblenden */
-[hero-glass='card']:hover [hero-glass='icon'] {
+/* =========================
+      Desktop (Hover)
+      ========================= */
+@media (min-width: 992px) {
+  [hero-glass='card']:hover [hero-glass='icon'] {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  [hero-glass='card']:hover [hero-glass='paragraph'] {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* =========================
+      Tablet (Klick => .is-active)
+      ========================= */
+[hero-glass='card'].is-active [hero-glass='icon'] {
   opacity: 0;
   filter: blur(10px);
 }
 
-[hero-glass='card']:hover [hero-glass='paragraph'] {
+[hero-glass='card'].is-active [hero-glass='paragraph'] {
   opacity: 1;
   filter: blur(0px);
 }
