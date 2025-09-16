@@ -5,46 +5,56 @@
 [hero-glass='paragraph'] {
   transition:
     opacity 200ms ease,
+    -webkit-filter 200ms ease,
     filter 200ms ease;
+  will-change: opacity, filter;
 }
 
 /* =========================
-      Basiszustand
-      ========================= */
+         Basiszustand
+         ========================= */
 [hero-glass='icon'] {
   opacity: 1;
+  -webkit-filter: blur(0px);
   filter: blur(0px);
 }
 
 [hero-glass='paragraph'] {
   opacity: 0;
+  -webkit-filter: blur(10px);
   filter: blur(10px);
 }
 
 /* =========================
-      Desktop (Hover)
-      ========================= */
+         Desktop (Hover)
+         ========================= */
 @media (min-width: 992px) {
   [hero-glass='card']:hover [hero-glass='icon'] {
     opacity: 0;
+    -webkit-filter: blur(10px);
     filter: blur(10px);
   }
 
   [hero-glass='card']:hover [hero-glass='paragraph'] {
     opacity: 1;
+    -webkit-filter: blur(0px);
     filter: blur(0px);
   }
 }
 
 /* =========================
-      Tablet (Klick => .is-active)
-      ========================= */
-[hero-glass='card'].is-active [hero-glass='icon'] {
-  opacity: 0;
-  filter: blur(10px);
-}
+         Mobile + Tablet (Tap)
+         ========================= */
+@media (max-width: 991px) {
+  [hero-glass='card'].is-active [hero-glass='icon'] {
+    opacity: 0;
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+  }
 
-[hero-glass='card'].is-active [hero-glass='paragraph'] {
-  opacity: 1;
-  filter: blur(0px);
+  [hero-glass='card'].is-active [hero-glass='paragraph'] {
+    opacity: 1;
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+  }
 }
